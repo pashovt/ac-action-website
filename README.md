@@ -28,18 +28,43 @@ npm run preview   # serve dist/
 
 ## Page structure: the six leaflet panels
 
-1. **Cover (hero).** The headline "Bringing convenience to your building." sits beside an A5 leaflet
-   cover drawn from the business card.
-   - On desktop, scrolling opens the leaflet in 3D to show three inside panels.
-   - Elsewhere it stays a still cover.
+1. **Cover (hero).** The headline "Bringing convenience to your building." sits beside an AC Action
+   vending machine (inline SVG, navy and gold).
+   - On desktop the machine glides to the centre as you scroll. For each of the three points, a
+     keypad button is pressed, an item (crisps, chocolate, a can) drops out of the delivery bin and
+     flies to its point, and the callout draws in. The positions are set in `hero.callouts` in
+     `site.js`.
+   - On mobile and with reduced motion, the three points are shown as a list.
 2. **About.** A business introduction and three points.
 3. **Our range.** Crisps & snacks, chocolate & confectionery, bottled & canned drinks, each with animated product models.
 4. **Workplace benefits.** A checklist (brochure style) plus the four sectors from the card: warehouses,
    call centres, high-rise buildings, office spaces.
-5. **Service & coverage.** Four numbered steps and an illustrative 15-mile map around Nottingham.
+5. **Service & coverage.** Four numbered steps, an illustrative map, and a **postcode checker**
+   (see below).
 6. **Contact.** Phone, email and area, plus an enquiry form.
 
 The FAQ sits between panels 5 and 6. The footer repeats the tagline.
+
+A **progress rail** runs down the left on desktop (1200px and wider). A gold line fills as you
+scroll, a can rolls down it, and markers 01–06 link to each panel. The markers sit at each
+section's real scroll position.
+
+## Postcode checker (service area)
+
+- **Where it lives:** `src/components/PostcodeChecker.jsx`, which calls the Vercel Function
+  `api/check-postcode.js`.
+- **How it works:** the function looks the postcode up with postcodes.io and measures the distance
+  to the service centre. It returns only `in`, `out`, `notfound` or `failed`. The page never shows
+  where the centre is or how far away the visitor is.
+- **The centre point** is kept out of the code and the public repo. Set it in Vercel under
+  Project → Settings → Environment Variables: `SERVICE_CENTRE_LAT`, `SERVICE_CENTRE_LNG` and
+  `SERVICE_RADIUS_MILES` (default 15). These are already set for Production and Preview.
+- **Results:**
+  - In range: invites the visitor to discuss their site.
+  - Out of range, not found or failed: directs them to the enquiry form.
+  - In every case the postcode is copied into the form.
+- **Local testing:** `npm run dev` doesn't serve `/api`. Use `vercel dev` with the environment
+  variables pulled (`vercel env pull`) to test the checker locally.
 
 ## Editing
 
@@ -50,7 +75,8 @@ The FAQ sits between panels 5 and 6. The footer repeats the tagline.
 - **Logo:** `src/components/Logo.jsx`. This is a redrawn SVG of the AC mark; replace it with the master file when supplied.
   The name is **AC Action** (not "AC Action Show").
 - **Product models:** `src/components/products/Product.jsx` (crisps, chocolate, can, bottle).
-- **Hero leaflet motion:** `src/hooks/useLeaflet.js`.
+- **Hero machine sequence:** `src/hooks/useMachineSequence.js` (machine artwork: `src/components/MachineSvg.jsx`).
+- **Progress rail:** `src/components/ScrollRail.jsx` and `src/hooks/useScrollRail.js`.
 
 ## Enquiry form
 
@@ -70,7 +96,7 @@ Before enabling it:
 - update the privacy policy to cover session recording
 - add a cookie-consent banner (UK GDPR / PECR)
 
-Events: `primary_cta_click`, `contact_phone_click`, `contact_email_click`, `enquiry_preview`.
+Events: `primary_cta_click`, `contact_phone_click`, `contact_email_click`, `enquiry_preview`, `postcode_check`.
 
 ## Launch checklist
 
@@ -79,7 +105,7 @@ Events: `primary_cta_click`, `contact_phone_click`, `contact_email_click`, `enqu
 - [ ] Service arrangements, payment options and costs wording confirmed
 - [ ] Real photos of AC Action machines and sites (replace the Unsplash stand-ins)
 - [ ] Form endpoint connected
-- [ ] Privacy policy page, and cookie consent if analytics is enabled
+- [ ] Privacy policy page (mention the postcode lookup via postcodes.io), and cookie consent if analytics is enabled
 - [ ] Remove `noindex` from `index.html` and the block in `public/robots.txt`
 - [ ] Custom domain on Vercel
 

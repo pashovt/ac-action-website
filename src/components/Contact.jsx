@@ -9,7 +9,7 @@ import Stripes from './Stripes.jsx';
 const FIELD_ORDER = ['name', 'email', 'business', 'postcode', 'siteType', 'dailyUsers', 'message'];
 
 /** Panel 6 — contact details and the enquiry form (form logic: src/lib/enquiry.js). */
-export default function Contact({ preferredSiteType = '' }) {
+export default function Contact({ preferredSiteType = '', preferredPostcode = '' }) {
   const [values, setValues] = useState(EMPTY_ENQUIRY);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -24,6 +24,14 @@ export default function Contact({ preferredSiteType = '' }) {
       setValues((v) => (v.siteType ? v : { ...v, siteType: preferredSiteType }));
     }
   }, [preferredSiteType]);
+
+  // The postcode checker can hand its postcode to the form.
+  useEffect(() => {
+    if (preferredPostcode) {
+      setValues((v) => ({ ...v, postcode: preferredPostcode }));
+      setResult(null);
+    }
+  }, [preferredPostcode]);
 
   useEffect(() => {
     if (result) resultRef.current?.focus();

@@ -58,15 +58,47 @@ export const photos = {
   office: { src: media('workplace.webp'), width: 1800, height: 1200, alt: 'A modern office kitchen with dark cabinets, a white worktop and a coffee machine.' },
 };
 
-/** Panel 1 — cover (hero). The leaflet opens on scroll on desktop. */
+/**
+ * Service area: the postcode check runs server-side (api/check-postcode.js).
+ * The centre point lives only in Vercel environment variables
+ * (SERVICE_CENTRE_LAT / SERVICE_CENTRE_LNG) and is never shown on the page.
+ */
+export const serviceArea = {
+  radiusMiles: 15,
+};
+
+export const checker = {
+  id: 'coverage',
+  heading: 'Check your postcode',
+  intro: 'Enter your site’s postcode to see if it is inside our service area.',
+  label: 'Site postcode',
+  placeholder: 'e.g. NG1 5FF',
+  button: 'Check',
+  inRange: 'Good news — your site is within our service area.',
+  inRangeCta: 'Discuss your site',
+  outRange: 'Your site looks to be outside our usual area. Send us an enquiry and we’ll let you know if we can help.',
+  outRangeCta: 'Send an enquiry',
+  notFound: 'We couldn’t find that postcode. Check it and try again, or send us an enquiry.',
+  failed: 'We couldn’t check your postcode just now. Please send us an enquiry instead.',
+  privacy: 'Your postcode is checked against our service area using postcodes.io, a free UK postcode lookup. It is not stored.',
+};
+
+/** Panel 1 — cover (hero): the AC Action vending machine. */
 export const hero = {
   kicker: 'Vending for Nottingham businesses',
   heading: 'Bringing convenience to your building.',
   lead: 'Quality snacks and drinks, conveniently placed in your workplace — for warehouses, offices, call centres and high-rise buildings.',
   primaryCta: { label: 'Discuss your site', href: '#contact' },
-  secondaryCta: { label: 'See our range', href: '#range' },
+  secondaryCta: { label: 'Check your postcode', href: '#coverage' },
   chips: ['Crisps & snacks', 'Chocolate & confectionery', 'Bottled & canned drinks'],
-  // Inside panels revealed when the leaflet opens (decorative previews).
+  // Desktop sequence: each point = a button press on the machine; the item
+  // drops out and flies to its point. x / y are % of the machine image.
+  callouts: [
+    { x: 11, y: 30, side: 'left', key: 4, item: { type: 'crisps', variant: 'amber' }, kicker: 'Our range', text: 'Crisps, chocolate & drinks.', note: 'A familiar selection, planned for your site' },
+    { x: 11, y: 86, side: 'left', key: 7, item: { type: 'chocolate', variant: 'purple' }, kicker: 'Where we work', text: 'Warehouses, offices & call centres.', note: 'And high-rise buildings with 50+ people' },
+    { x: 90, y: 47, side: 'right', key: 10, item: { type: 'can', variant: 'coral' }, kicker: 'Local service', text: 'Right here around Nottingham.', note: 'Within around 15 miles — check your postcode' },
+  ],
+  // Previous leaflet panels (kept for reference; not rendered).
   inside: [
     { title: 'Who we are', body: 'A local vending business placing quality snacks and drinks where your people work.' },
     { title: 'Our range', body: 'Crisps, chocolate and chilled drinks — a familiar choice for every break.' },
@@ -233,6 +265,16 @@ export const decor = {
     { type: 'can', variant: 'teal', bottom: '6%', right: '3%', size: '3.4rem', rotate: 12, depth: 0.7, mobile: false },
   ],
 };
+
+/** Left-hand progress rail: one marker per leaflet panel. */
+export const rail = [
+  { id: 'top', label: 'Cover' },
+  { id: 'about', label: 'About' },
+  { id: 'range', label: 'Our range' },
+  { id: 'benefits', label: 'Benefits' },
+  { id: 'service', label: 'Service' },
+  { id: 'contact', label: 'Contact' },
+];
 
 export const footer = {
   links: [...nav.links, { label: 'Questions', href: '#faq' }, { label: 'Contact', href: '#contact' }],

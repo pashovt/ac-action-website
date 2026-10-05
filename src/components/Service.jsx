@@ -1,9 +1,10 @@
 import { service } from '../content/site.js';
 import PanelHead from './PanelHead.jsx';
 import CoverageMap from './CoverageMap.jsx';
+import PostcodeChecker from './PostcodeChecker.jsx';
 
 /** Panel 5 — how it works (numbered steps) and the 15-mile service area. */
-export default function Service() {
+export default function Service({ onUsePostcode }) {
   const { coverage } = service;
   return (
     <section id={service.id} className="section service" aria-labelledby="service-title">
@@ -24,7 +25,7 @@ export default function Service() {
           {service.serviceNote}
         </p>
 
-        <div className="coverage" data-reveal>
+        <div className="coverage" id="coverage" data-reveal>
           <div className="coverage__text">
             <h3>{coverage.heading}</h3>
             <p>{coverage.body}</p>
@@ -36,6 +37,7 @@ export default function Service() {
                 ))}
             </ul>
             <p className="coverage__more">…and surrounding areas within around 15 miles.</p>
+            <PostcodeChecker onUsePostcode={onUsePostcode} />
           </div>
           <CoverageMap places={coverage.places} />
         </div>
