@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+.DS_Store
+npm-debug.log*
+.vite
+.vercel
+
+# Competitor captures: private reference only, never published
+research/raw/

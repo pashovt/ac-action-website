@@ -1,0 +1,3 @@
+# Pre-launch: not for indexing. Remove this block at launch.
+User-agent: *
+Disallow: /

@@ -1,0 +1,69 @@
+/*
+ * AC Action design tokens. Colours sampled from the business card:
+ * navy #0d1823 / #141c26, gold #aa8548 → #c7a569 → #d5b57a, cream #f3f1ed.
+ */
+:root {
+  --navy-950: #0a141c;
+  --navy-900: #0d1823;
+  --navy-850: #141c26;
+  --navy-800: #19222c;
+  --navy-700: #232a34;
+  --navy-600: #2f3946;
+  --gold-700: #aa8548;
+  --gold-600: #b99559;
+  --gold-500: #c7a569;
+  --gold-400: #d5b57a;
+  --gold-300: #e6cf98;
+  --gold-ink: #7a5c27; /* gold for text on cream (AA contrast) */
+  --cream: #f3f1ed;
+  --cream-2: #e9e8e4;
+  --white: #ffffff;
+  --gold-gradient: linear-gradient(135deg, #aa8548 0%, #d5b57a 42%, #f0dca8 55%, #c7a569 70%, #a78856 100%);
+
+  /* Semantic (dark default) */
+  --bg: var(--navy-900);
+  --surface: var(--navy-850);
+  --fg: var(--cream);
+  --fg-muted: #b8bec7;
+  --accent: var(--gold-500);
+  --accent-text: var(--gold-400);
+  --line: rgb(213 181 122 / 0.22);
+  --line-soft: rgb(243 241 237 / 0.1);
+  --focus: var(--gold-400);
+  --error: #ffb4a6;
+
+  --font-sans: 'Montserrat Variable', 'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-eyebrow: 0.75rem;
+  --fs-lead: clamp(1.125rem, 1rem + 0.4vw, 1.3125rem);
+  --fs-hero: clamp(2.5rem, 1.3rem + 4vw, 5rem);
+  --fs-h2: clamp(2rem, 1.2rem + 2.6vw, 3.5rem);
+  --fs-h3: clamp(1.1875rem, 1.05rem + 0.4vw, 1.4375rem);
+
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 3rem);
+  --container: 1280px;
+  --space-section: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+  --header-h: 76px;
+  --radius: 6px;
+  --radius-lg: 14px;
+
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --ease-out: cubic-bezier(0.22, 0.8, 0.2, 1);
+
+  --leaflet-w: clamp(200px, 19vw, 290px);
+}
+
+.theme-light {
+  --bg: var(--cream);
+  --surface: var(--white);
+  --fg: var(--navy-900);
+  --fg-muted: #4a5260;
+  --accent: var(--gold-600);
+  --accent-text: var(--gold-ink);
+  --line: rgb(13 24 35 / 0.14);
+  --line-soft: rgb(13 24 35 / 0.08);
+  --focus: var(--navy-900);
+  --error: #a3261a;
+}
