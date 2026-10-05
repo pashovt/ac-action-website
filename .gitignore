@@ -12,3 +12,4 @@ npm-debug.log*
 
 # Competitor captures: private reference only, never published
 research/raw/
+.env*
